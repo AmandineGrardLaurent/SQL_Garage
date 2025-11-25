@@ -95,3 +95,27 @@ UPDATE g_article
 SET 
 a_quantite = 15
 WHERE a_id = 1;
+
+-- Enlever le lien de la foreign key
+
+ALTER TABLE g_voiture DROP FOREIGN KEY g_voiture_ibfk_1;
+-- le nom de la contrainte se trouve dans le fichier exporté de la bdd
+
+-- Recréer le lien de la foreign key + contrainte ON CASCADE pour DELETE et UPDATE
+
+ALTER TABLE `g_voiture` 
+ADD CONSTRAINT `article_fk` 
+FOREIGN KEY (`v_fk_article_voiture_id`) 
+REFERENCES `g_article` (`a_id`) 
+ON UPDATE CASCADE ON DELETE CASCADE
+
+-- Afficher les contraintes d'une table
+
+SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+WHERE TABLE_NAME = 'g_voiture';
+ 
+-- Supprimer la voiture v_id = 4 de la table g_voiture
+ 
+DELETE FROM g_voiture
+WHERE id = 4;
