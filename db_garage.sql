@@ -119,3 +119,4 @@ WHERE TABLE_NAME = 'g_voiture';
  
 DELETE FROM g_voiture
 WHERE id = 4;
+
