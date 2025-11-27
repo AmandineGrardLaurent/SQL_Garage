@@ -16,11 +16,22 @@ CREATE TABLE IF NOT EXISTS g_catalogue_voiture(
 	cv_id INT PRIMARY KEY  AUTO_INCREMENT NOT NULL,
 	cv_marque VARCHAR(50),
 	cv_type VARCHAR(50),
-	cv_energie VARCHAR(50),
-	cv_fk_article_id INT,
-	FOREIGN KEY (cv_fk_article_id)
-	REFERENCES g_article(a_id)
+	cv_energie VARCHAR(50)
 ) ENGINE=InnoDB CHARSET=utf8mb4;
+
+
+-- Création de la table g_article_catalogue_vehicule
+
+CREATE TABLE IF NOT EXISTS g_article_catalogue_vehicule(
+	acv_id INT PRIMARY KEY  AUTO_INCREMENT NOT NULL,
+	acv_fk_article_id INT,
+	FOREIGN KEY (acv_fk_article_id)
+	REFERENCES g_article(a_id),
+	acv_fk_catalogue_voiture_id INT,
+	FOREIGN KEY (acv_fk_catalogue_voiture_id)
+	REFERENCES g_catalogue_voiture(cv_id)
+) ENGINE=InnoDB CHARSET=utf8mb4;
+	
 
 
 -- Création table client
@@ -38,7 +49,7 @@ CREATE TABLE IF NOT EXISTS g_client(
 CREATE TABLE IF NOT EXISTS g_vehicule_client(
 	vc_id INT PRIMARY KEY  AUTO_INCREMENT NOT NULL,
 	vc_plaque VARCHAR(50),
-	vc_année INT,
+	vc_annee INT,
 	vc_fk_catalogue_voiture_id INT,
 	FOREIGN KEY (vc_fk_catalogue_voiture_id)
 	REFERENCES g_catalogue_voiture(cv_id),
@@ -87,3 +98,4 @@ CREATE TABLE IF NOT EXISTS g_or_article(
 	FOREIGN KEY (ora_fk_article_id)
 	REFERENCES g_article(a_id)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+	
