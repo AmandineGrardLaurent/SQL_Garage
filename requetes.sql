@@ -95,7 +95,13 @@ JOIN g_article ON a_id = ora_fk_article_id
 
 WHERE or_id = 21;
 
--- exo 4 affichage stock pour une même désignation et même marque
+-- mise à jour du stock
+
+UPDATE g_article 
+SET 
+WHERE ora_fk_article_id
+
+-- exo 4 afficher le stock pour une même désignation et même marque
 
 SELECT 
     a_designation,
@@ -104,6 +110,39 @@ SELECT
 FROM g_article
 GROUP BY a_designation, a_marque 
 ORDER BY a_marque;
+
+-- afficher le compte de désignation filtre à air pour des marques différentes
+
+SELECT 
+    a_designation,
+    COUNT(a_designation) AS stock
+FROM g_article
+WHERE a_designation="Filtre à air"
+GROUP BY a_designation
+HAVING stock > 1;
+
+-- afficher le compte d'une marque pour des articles différents
+
+SELECT 
+    a_marque,
+    COUNT(a_marque) AS stock
+FROM g_article
+GROUP BY a_marque
+HAVING stock > 1;
+
+-- exo 5 afficher le nombre d'or pour un même véhicule
+
+SELECT 
+    c_nom,
+    vc_plaque,
+   	COUNT(or_fk_vehicule_client_id) AS nb_or
+FROM g_vehicule_client
+JOIN g_client
+ON c_id=vc_fk_client_id
+JOIN g_or
+ON vc_id=or_fk_vehicule_client_id
+GROUP BY vc_id, c_nom, vc_plaque 
+ORDER BY g_client.c_nom ASC 
 
 
 
