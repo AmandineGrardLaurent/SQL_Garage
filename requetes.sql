@@ -143,8 +143,52 @@ JOIN g_client
 ON c_id=vc_fk_client_id
 JOIN g_or
 ON vc_id=or_fk_vehicule_client_id
-GROUP BY vc_id, c_nom, vc_plaque 
-ORDER BY c_nom ASC 
+WHERE vc_id = (
+    SELECT MIN(vc_id)
+    FROM g_vehicule_client
+    WHERE vc_fk_client_id = c_id
+)
+GROUP BY vc_id, c_nom, vc_plaque;
 
 
+--
+SELECT 
+    c.c_nom,
+    v.v_marque ,
+    v.v_modele ,
+    v.v_plaque,
+    COUNT(DISTINCT o.ord_fk_id_facture) AS Nombre_de_passages
+FROM g_voiture v
+JOIN g_client c ON v.v_fk_id_client = c.c_id
+JOIN g_ordre o ON o.ord_fk_id_client = c.c_id
+GROUP BY c_nom
+ORDER BY Nombre_de_passages DESC;
+--
 
+-- exo 5 afficher la moyenne des filtres toutes marques confondus et par marque 
+
+SELECT
+    a_marque,
+    ROUND(AVG(a_prix),2) AS prix_moyen_marque
+FROM g_article
+WHERE a_designation LIKE "%Filtre%"
+GROUP BY a_marque
+UNION ALL
+SELECT
+    'MOYENNE FILTRES -->' AS a_marque,
+    ROUND(AVG(prix_moyen_marque),2) AS prix_moyen_marque
+FROM (
+    SELECT AVG(a_prix) AS prix_moyen_marque
+    FROM g_article
+    WHERE a_designation LIKE "%Filtre%"
+    GROUP BY a_marque
+) moyenne_filtre;
+
+
+SELECT 
+    a_marque,
+    a_prix,
+    ROUND(AVG(a_prix) OVER (), 2) AS moy_prix_filtres,
+    ROUND(AVG(a_prix) OVER (PARTITION BY a_marque), 2) AS moy_prix_par_marque
+FROM g_article
+WHERE a_designation LIKE '%filtre%';
