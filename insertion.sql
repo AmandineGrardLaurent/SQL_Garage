@@ -283,4 +283,23 @@ INSERT INTO g_or_article (ora_qty, ora_montant_a, ora_fk_or_id, ora_fk_article_i
 (1, 74.9, 25, 15),
 (2, 22, 25, 17);
 
+-- Ajout d'articles pour exo 4
+
+INSERT INTO g_article(a_reference, a_designation, a_marque, a_quantite, a_prix) VALUES
+('VLX51C6', 'Filtre à huile', 'MAN FILTER', 14, 8.90),
+('KT0WFQA', 'Filtre pollen', 'MECAFILTER', 52, 12.50),
+('UICK6Z7', 'Filtre à air', 'MAN FILTER', 11, 14.20),
+('Q9DREJ6', 'Filtre à carburant', 'MAN FILTER', 77, 17.90),
+('W7FGJ2S', 'Filtre à huile', 'BOSCH', 18, 9.40),
+('S0PAHZF', 'Filtre pollen', 'BOSCH', 149, 11.80),
+('DBAYMQE', 'Filtre à pollen', 'BOSCH', 72, 10.90),
+('3XTBQ0F', 'Filtre à carburant', 'BOSCH', 27, 18.50),
+('ZM3D8CY', 'Filtre à huile', 'MECAFILTER', 21, 8.70),
+('7I8BP13', 'Filtre à huile', 'MECAFILTER', 103, 9.10),
+('7I8BP13', 'Filtre à air', 'MECAFILTER', 103, 13.60),
+('YPEWALU', 'Filtre à carburant', 'MECAFILTER', 66, 16.80),
+('958TEVW', 'Filtre à huile', 'PURFLUX', 65, 8.50),
+('BK9P3DX', 'Filtre pollen', 'PURFLUX', 38, 11.20),
+('1HRM0Q5', 'Filtre à air', 'PURFLUX', 76, 13.90),
+('BP5D3IW', 'Filtre à carburant', 'PURFLUX', 35, 17.40);
 

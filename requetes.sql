@@ -95,6 +95,15 @@ JOIN g_article ON a_id = ora_fk_article_id
 
 WHERE or_id = 21;
 
+-- exo 4 affichage stock pour une même désignation et même marque
+
+SELECT 
+    a_designation,
+    a_marque,
+    SUM(a_qty) AS total_quantite
+FROM g_article
+GROUP BY a_designation, a_marque 
+ORDER BY a_marque;
 
 
 
