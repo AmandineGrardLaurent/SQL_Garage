@@ -142,7 +142,7 @@ ON c_id=vc_fk_client_id
 JOIN g_or
 ON vc_id=or_fk_vehicule_client_id
 GROUP BY vc_id, c_nom, vc_plaque 
-ORDER BY g_client.c_nom ASC 
+ORDER BY c_nom ASC 
 
 
 
