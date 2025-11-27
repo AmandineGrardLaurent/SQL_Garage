@@ -95,11 +95,13 @@ JOIN g_article ON a_id = ora_fk_article_id
 
 WHERE or_id = 21;
 
--- mise à jour du stock
+-- mise à jour du stock pour l'article 1 après un or
 
 UPDATE g_article 
-SET 
-WHERE ora_fk_article_id
+JOIN g_or_article
+    ON a_id = ora_fk_article_id
+SET a_qty=(a_qty-ora_qty)
+WHERE ora_fk_article_id=1;
 
 -- exo 4 afficher le stock pour une même désignation et même marque
 
